@@ -3,284 +3,499 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Central de Chats IA - Coleção Completa 🤖</title>
+    <title>Central de Chats IA - Coleção Completa</title>
     <style>
-        /* Variáveis CSS para Cores */
         :root {
-            --bg-color: #f4f4f9;
-            --text-color: #333;
-            --container-bg: #fff;
-            --select-bg: #f8f8f8;
-            --accent-color: #007bff;
-            --shadow-color: rgba(0, 0, 0, 0.1);
-            --secondary-bg: #e0e0e0; /* Nova cor para o box secundário */
-            --secondary-text: #222;
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --text-primary: #e4e4e7;
+            --text-secondary: #a1a1aa;
+            --accent-primary: #3b82f6;
+            --accent-hover: #2563eb;
+            --border-color: #27272a;
+            --shadow: rgba(0, 0, 0, 0.5);
         }
 
-        /* Dark Mode */
-        body.dark-mode {
-            --bg-color: #121212;
-            --text-color: #e0e0e0;
-            --container-bg: #1f1f1f;
-            --select-bg: #333333;
-            --accent-color: #5d9cec;
-            --shadow-color: rgba(0, 0, 0, 0.5);
-            --secondary-bg: #333333;
-            --secondary-text: #f0f0f0;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 40px 20px;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            text-align: center;
-            transition: background-color 0.3s, color 0.3s;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
         }
 
-        /* Mudança: Usei 'margin: 0 auto;' para centralizar e garanti que o 'display: block' implícito do div ocupe a linha. */
-        .container { 
-            background-color: var(--container-bg); 
-            padding: 40px; 
-            border-radius: 12px; 
-            box-shadow: 0 10px 25px var(--shadow-color); 
-            margin: 0 auto; /* Centraliza o contêiner */
-            max-width: 600px;
-            width: 100%;
-            transition: background-color 0.3s;
-            margin-bottom: 20px; /* Adiciona um pequeno espaço abaixo do contêiner principal */
+        /* Navigation */
+        nav {
+            background-color: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
         }
 
-        h1 { 
-            color: var(--accent-color); 
-            margin-bottom: 30px; 
-            font-size: 2em;
-        }
-        
-        /* Tema Toggle */
-        .theme-toggle-container {
-            margin-bottom: 30px;
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
         }
 
-        .theme-toggle-container button {
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+        .nav-brand {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-brand:hover {
+            color: var(--accent-primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 0;
+            align-items: center;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 20px 24px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s, background-color 0.3s;
             cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s, transform 0.2s;
         }
 
-        .theme-toggle-container button:hover {
-            background-color: #0056b3;
-            transform: translateY(-1px);
+        .nav-link:hover {
+            color: var(--text-primary);
+            background-color: var(--bg-tertiary);
         }
 
-        /* Estilos do Dropdown */
-        label { 
-            display: block; 
-            margin-bottom: 15px; 
-            font-size: 1.1em; 
-            font-weight: bold; 
-            color: var(--text-color); 
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+            box-shadow: 0 10px 25px var(--shadow);
+            overflow: hidden;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.2s, color 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .menu-toggle span {
+            width: 24px;
+            height: 2px;
+            background-color: var(--text-primary);
+            transition: 0.3s;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--accent-primary), #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+        }
+
+        /* AI Selector */
+        .selector-section {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .selector-label {
+            display: block;
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
         }
 
         #ai-select {
-            padding: 15px 20px;
-            font-size: 1.1em;
-            border-radius: 8px;
-            border: 2px solid var(--accent-color);
             width: 100%;
+            padding: 16px 20px;
+            font-size: 1rem;
+            background-color: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
             cursor: pointer;
-            background-color: var(--select-bg);
-            color: var(--text-color);
-            appearance: none; /* Remove estilo padrão do sistema */
-            background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="292.4" height="292.4"><path fill="%23007bff" d="M287 69.4a17.6 17.6 0 0 0-13.6-6.8H19a17.6 17.6 0 0 0-13.6 6.8 17.6 17.6 0 0 0 0 24.3l126.3 126.3a17.6 17.6 0 0 0 24.7 0l126.3-126.3a17.6 17.6 0 0 0 0-24.3z"/></svg>');
+            transition: border-color 0.3s, background-color 0.3s;
+            appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%233b82f6" d="M6 9L1 4h10z"/></svg>');
             background-repeat: no-repeat;
-            background-position: right 15px center;
-            background-size: 10px;
-            transition: border-color 0.3s;
+            background-position: right 16px center;
+            padding-right: 45px;
         }
-        
-        body.dark-mode #ai-select {
-             /* Cor do SVG ajustada para Dark Mode, se necessário */
-             background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="292.4" height="292.4"><path fill="%235d9cec" d="M287 69.4a17.6 17.6 0 0 0-13.6-6.8H19a17.6 17.6 0 0 0-13.6 6.8 17.6 17.6 0 0 0 0 24.3l126.3 126.3a17.6 17.6 0 0 0 24.7 0l126.3-126.3a17.6 17.6 0 0 0 0-24.3z"/></svg>');
+
+        #ai-select:hover {
+            border-color: var(--accent-primary);
         }
 
         #ai-select:focus {
-            border-color: #0056b3;
             outline: none;
-            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
 
-        /* Estilo para os grupos (categorias) */
         optgroup {
-            font-style: normal;
-            font-weight: bold;
-            color: var(--accent-color);
+            font-weight: 700;
+            color: var(--accent-primary);
+            background-color: var(--bg-secondary);
+        }
+
+        option {
+            padding: 8px;
+            background-color: var(--bg-tertiary);
+            color: var(--text-primary);
         }
 
         .note {
-            margin-top: 20px;
-            font-size: 0.9em;
-            color: #777;
-        }
-        
-        body.dark-mode .note {
-            color: #bbb;
+            margin-top: 16px;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-align: center;
         }
 
-        /* Seção de Agregadores */
+        /* Aggregator Section */
         .aggregator-section {
-            background-color: var(--secondary-bg);
-            color: var(--secondary-text);
-            padding: 20px;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
             border-radius: 12px;
-            box-shadow: 0 5px 15px var(--shadow-color);
-            margin: 0 auto 40px; /* Centraliza e adiciona margem inferior */
-            max-width: 600px;
-            width: 100%;
-            text-align: left;
+            padding: 40px;
+            margin-bottom: 40px;
         }
 
         .aggregator-section h2 {
-            color: var(--accent-color);
-            margin-top: 0;
-            font-size: 1.5em;
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 5px;
-            margin-bottom: 15px;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--accent-primary);
+        }
+
+        .aggregator-section p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.7;
         }
 
         .aggregator-section ul {
             list-style: none;
-            padding: 0;
         }
 
         .aggregator-section li {
-            margin-bottom: 10px;
-            font-size: 1em;
+            margin-bottom: 24px;
+            padding: 20px;
+            background-color: var(--bg-tertiary);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: border-color 0.3s, transform 0.2s;
+        }
+
+        .aggregator-section li:hover {
+            border-color: var(--accent-primary);
+            transform: translateX(4px);
         }
 
         .aggregator-section a {
-            color: var(--accent-color);
+            color: var(--accent-primary);
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 1.125rem;
             transition: color 0.2s;
         }
 
         .aggregator-section a:hover {
-            color: #0056b3;
-            text-decoration: underline;
+            color: var(--accent-hover);
+        }
+
+        .aggregator-section li br {
+            margin-bottom: 8px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--text-secondary);
+            margin-top: 80px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background-color: var(--bg-secondary);
+                flex-direction: column;
+                border-bottom: 1px solid var(--border-color);
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s;
+            }
+
+            .nav-menu.active {
+                max-height: 400px;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                border: none;
+                border-top: 1px solid var(--border-color);
+                border-radius: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s;
+            }
+
+            .dropdown.active .dropdown-menu {
+                max-height: 300px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .selector-section, .aggregator-section {
+                padding: 24px;
+            }
         }
     </style>
 </head>
-<body class="normal-mode">
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">Odair José Bellini</a>
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Início</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" onclick="toggleDropdown(event)">Ferramentas ▾</a>
+                    <div class="dropdown-menu">
+                        <a href="chats-ia.html" class="dropdown-item">🤖 Central de Chats IA</a>
+                        <a href="#" class="dropdown-item" style="opacity: 0.5;">📝 Em breve...</a>
+                    </div>
+                </li>
+                <li class="nav-item"><a href="https://github.com/odairjosebellini" target="_blank" class="nav-link">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
 
+    <!-- Main Content -->
     <div class="container">
-        <div class="theme-toggle-container">
-            <button onclick="toggleTheme()">Alternar Tema ✨</button>
+        <!-- Hero -->
+        <div class="hero">
+            <h1>🤖 Central de Chats IA</h1>
+            <p>Acesso unificado a todos os principais assistentes de inteligência artificial</p>
         </div>
 
-        <h1>Central de Lançamento de IAs 🚀</h1>
-        
-        <label for="ai-select">Selecione o seu Assistente ou Agente de IA:</label>
-        <select id="ai-select" onchange="openAIChat(this.value)">
-            <option value="">-- Escolha uma Ferramenta para Abrir em Nova Aba --</option>
-            
-            <optgroup label="👑 Chats e Modelos Liderança">
-                <option value="https://chatgpt.com/">ChatGPT (OpenAI) 🧠</option>
-                <option value="https://gemini.google.com/">Gemini (Google) 🌟</option>
-                <option value="https://claude.ai/">Claude (Anthropic) 📝</option>
-                <option value="https://copilot.microsoft.com/">Microsoft Copilot 💻</option>
-                <option value="https://www.meta.ai/">Meta AI / Llama 💬</option>
-                <option value="https://grok.x.ai/">Grok (xAI) 😂</option>
-            </optgroup>
-            
-            <optgroup label="🔎 Pesquisa e Fontes">
-                <option value="https://www.perplexity.ai/">Perplexity AI 📚</option>
-                <option value="https://phind.com/">Phind (Devs) 👨‍💻</option>
-                <option value="https://you.com/chat">You.com (YouChat) 🔍</option>
-            </optgroup>
-            
-            <optgroup label="🛡️ Privacidade e Open Source">
-                <option value="https://chat.mistral.ai/">Mistral Le Chat 🇫🇷</option>
-                <option value="https://huggingface.co/chat/">Hugging Chat 🐻</option>
-                <option value="https://chat.z.ai/">Chat.Z (Alternativa Open Source) 💡</option>
-                <option value="https://chat.deepseek.com/">DeepSeek Chat (Código e Matemática) 📐</option>
-                <option value="https://lumo.proton.me/guest">Lumo Chat (Proton) 🔒</option>
-                <option value="https://chat.qwen.ai/">Qwen (Alibaba) 🐉</option>
-                <option value="https://huggingface.co/spaces/tiiuae/falcon-7b-instruct-chat">Falcon (TII) 🦅</option>
-            </optgroup>
-            
-            <optgroup label="🤖 Agentes e Frameworks (Devs/Tech)">
-                <option value="https://devin.ai/">Devin (Cognition Labs) 💡</option>
-                <option value="https://opendevin.ai/">OpenDevin (Projeto Comunitário) 🏗️</option>
-                <option value="https://docs.langchain.com/docs/">LangChain (Framework) 🔗</option>
-                <option value="https://github.com/microsoft/autogen">AutoGen (Microsoft) ⚙️</option>
-                <option value="https://github.com/significant-gravitas/auto-gpt">Auto-GPT (Projeto Original) 🧠✨</option>
-                <option value="https://www.crewai.com/">CrewAI (Framework de Agentes) 🧑‍🤝‍🧑</option>
-                <option value="https://www.tavily.com/">Tavily (Motor de Busca p/ Agentes) 🌐</option>
-            </optgroup>
+        <!-- AI Selector -->
+        <div class="selector-section">
+            <label class="selector-label" for="ai-select">Selecione seu Assistente ou Agente de IA:</label>
+            <select id="ai-select" onchange="openAIChat(this.value)">
+                <option value="">-- Escolha uma Ferramenta para Abrir em Nova Aba --</option>
 
-            <optgroup label="💖 Nicho e Conversação">
-                <option value="https://pi.ai/talk">Pi.ai (Inflection) 👂</option>
-                <option value="https://beta.character.ai/">Character.AI (Personagens) 🎭</option>
-                <option value="https://www.poe.com/">Poe (Agregador de Bots) 🤖</option>
-                <option value="https://chat.cohere.com/">Cohere 📝</option>
-            </optgroup>
+                <optgroup label="👑 Chats e Modelos Liderança">
+                    <option value="https://chatgpt.com/">ChatGPT (OpenAI) 🧠</option>
+                    <option value="https://gemini.google.com/">Gemini (Google) 🌟</option>
+                    <option value="https://claude.ai/">Claude (Anthropic) 📝</option>
+                    <option value="https://copilot.microsoft.com/">Microsoft Copilot 💻</option>
+                    <option value="https://www.meta.ai/">Meta AI / Llama 💬</option>
+                    <option value="https://grok.x.ai/">Grok (xAI) 😂</option>
+                </optgroup>
 
-        </select>
-        
-        <p class="note">Ao selecionar, a página (chat ou documentação/demo) abrirá imediatamente em uma **nova aba** para garantir o acesso funcional e seguro.</p>
+                <optgroup label="🔎 Pesquisa e Fontes">
+                    <option value="https://www.perplexity.ai/">Perplexity AI 📚</option>
+                    <option value="https://phind.com/">Phind (Devs) 👨‍💻</option>
+                    <option value="https://you.com/chat">You.com (YouChat) 🔍</option>
+                </optgroup>
+
+                <optgroup label="🛡️ Privacidade e Open Source">
+                    <option value="https://chat.mistral.ai/">Mistral Le Chat 🇫🇷</option>
+                    <option value="https://huggingface.co/chat/">Hugging Chat 🐻</option>
+                    <option value="https://chat.z.ai/">Chat.Z (Alternativa Open Source) 💡</option>
+                    <option value="https://chat.deepseek.com/">DeepSeek Chat (Código e Matemática) 📐</option>
+                    <option value="https://lumo.proton.me/guest">Lumo Chat (Proton) 🔒</option>
+                    <option value="https://chat.qwen.ai/">Qwen (Alibaba) 🐉</option>
+                    <option value="https://huggingface.co/spaces/tiiuae/falcon-7b-instruct-chat">Falcon (TII) 🦅</option>
+                </optgroup>
+
+                <optgroup label="🤖 Agentes e Frameworks (Devs/Tech)">
+                    <option value="https://devin.ai/">Devin (Cognition Labs) 💡</option>
+                    <option value="https://opendevin.ai/">OpenDevin (Projeto Comunitário) 🏗️</option>
+                    <option value="https://docs.langchain.com/docs/">LangChain (Framework) 🔗</option>
+                    <option value="https://github.com/microsoft/autogen">AutoGen (Microsoft) ⚙️</option>
+                    <option value="https://github.com/significant-gravitas/auto-gpt">Auto-GPT (Projeto Original) 🧠✨</option>
+                    <option value="https://www.crewai.com/">CrewAI (Framework de Agentes) 🧑‍🤝‍🧑</option>
+                    <option value="https://www.tavily.com/">Tavily (Motor de Busca p/ Agentes) 🌐</option>
+                </optgroup>
+
+                <optgroup label="💖 Nicho e Conversação">
+                    <option value="https://pi.ai/talk">Pi.ai (Inflection) 👂</option>
+                    <option value="https://beta.character.ai/">Character.AI (Personagens) 🎭</option>
+                    <option value="https://www.poe.com/">Poe (Agregador de Bots) 🤖</option>
+                    <option value="https://chat.cohere.com/">Cohere 📝</option>
+                </optgroup>
+            </select>
+
+            <p class="note">Ao selecionar, a página abrirá imediatamente em uma nova aba para garantir acesso funcional e seguro.</p>
+        </div>
+
+        <!-- Aggregator Section -->
+        <div class="aggregator-section">
+            <h2>Pontos de Acesso Unificados (APIs e Playgrounds)</h2>
+            <p>Use essas plataformas para acessar e comparar dezenas de modelos (incluindo GPT-4, Claude, Llama, etc.) com uma única chave API e otimização de custos.</p>
+            <ul>
+                <li>
+                    <a href="https://openrouter.ai/" target="_blank">OpenRouter.ai ✨</a>
+                    <br><br>O "router" mais popular para APIs de modelos. Excelente para testar e usar modelos de forma flexível.
+                </li>
+                <li>
+                    <a href="https://huggingface.co/models" target="_blank">Hugging Face Models Hub 🐻</a>
+                    <br><br>O centro da comunidade Open Source. Permite testar modelos no navegador e encontrar APIs.
+                </li>
+                <li>
+                    <a href="https://deepinfra.com/" target="_blank">DeepInfra ⚙️</a>
+                    <br><br>Foco em velocidade e custo-benefício para modelos de código aberto.
+                </li>
+            </ul>
+        </div>
     </div>
 
-    <div class="aggregator-section">
-        <h2>Pontos de Acesso Unificados (APIs e Playgrounds)</h2>
-        <p>Use essas plataformas para acessar e comparar dezenas de modelos (incluindo GPT-4, Claude, Llama, etc.) com uma única chave API e otimização de custos.</p>
-        <ul>
-            <li>
-                <a href="https://openrouter.ai/" target="_blank">OpenRouter.ai</a> ✨
-                <br>O "router" mais popular para APIs de modelos. Excelente para testar e usar modelos de forma flexível.
-            </li>
-            <li>
-                <a href="https://huggingface.co/models" target="_blank">Hugging Face Models Hub</a> 🐻
-                <br>O centro da comunidade Open Source. Permite testar modelos no navegador e encontrar APIs.
-            </li>
-            <li>
-                <a href="https://deepinfra.com/" target="_blank">DeepInfra</a> ⚙️
-                <br>Foco em velocidade e custo-benefício para modelos de código aberto.
-            </li>
-        </ul>
-    </div>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Odair José Bellini. Todos os direitos reservados.</p>
+    </footer>
+
     <script>
         function openAIChat(url) {
             if (url) {
-                // Abre a URL na nova aba do navegador
                 window.open(url, '_blank');
-
-                // Opcional: Reseta o dropdown
                 setTimeout(() => {
                     document.getElementById('ai-select').value = "";
                 }, 100);
             }
         }
-        
-        // Função para alternar entre Dark Mode e Normal Mode
-        function toggleTheme() {
-            const body = document.body;
-            if (body.classList.contains('dark-mode')) {
-                body.classList.remove('dark-mode');
-                body.classList.add('normal-mode');
-            } else {
-                body.classList.remove('normal-mode');
-                body.classList.add('dark-mode');
+
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        function toggleDropdown(event) {
+            event.preventDefault();
+            if (window.innerWidth <= 768) {
+                const dropdown = event.target.closest('.dropdown');
+                dropdown.classList.toggle('active');
             }
         }
-    </script>
 
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('navMenu');
+            if (!event.target.closest('nav')) {
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>

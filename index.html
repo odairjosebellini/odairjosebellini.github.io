@@ -3,24 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Odair José Bellini - GitHub Pages</title>
+    <title>Odair José Bellini - Portfólio</title>
     <style>
         :root {
-            --bg-color: #f4f4f9;
-            --text-color: #333;
-            --container-bg: #fff;
-            --accent-color: #007bff;
-            --shadow-color: rgba(0, 0, 0, 0.1);
-            --card-bg: #f8f9fa;
-        }
-
-        body.dark-mode {
-            --bg-color: #121212;
-            --text-color: #e0e0e0;
-            --container-bg: #1f1f1f;
-            --accent-color: #5d9cec;
-            --shadow-color: rgba(0, 0, 0, 0.5);
-            --card-bg: #2a2a2a;
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --text-primary: #e4e4e7;
+            --text-secondary: #a1a1aa;
+            --accent-primary: #3b82f6;
+            --accent-hover: #2563eb;
+            --border-color: #27272a;
+            --shadow: rgba(0, 0, 0, 0.5);
         }
 
         * {
@@ -30,209 +24,370 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
             min-height: 100vh;
-            padding: 20px;
-            transition: background-color 0.3s, color 0.3s;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        header {
-            text-align: center;
-            padding: 40px 20px;
-            background-color: var(--container-bg);
-            border-radius: 12px;
-            box-shadow: 0 10px 25px var(--shadow-color);
-            margin-bottom: 30px;
-            transition: background-color 0.3s;
-        }
-
-        h1 {
-            color: var(--accent-color);
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-            color: var(--text-color);
-            font-size: 1.2em;
-            opacity: 0.8;
-        }
-
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            box-shadow: 0 4px 10px var(--shadow-color);
-            transition: background-color 0.3s, transform 0.2s;
+        /* Navigation */
+        nav {
+            background-color: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
             z-index: 1000;
+            backdrop-filter: blur(10px);
         }
 
-        .theme-toggle:hover {
-            background-color: #0056b3;
-            transform: translateY(-2px);
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
         }
 
-        .content {
-            background-color: var(--container-bg);
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px var(--shadow-color);
-            transition: background-color 0.3s;
+        .nav-brand {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-brand:hover {
+            color: var(--accent-primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 0;
+            align-items: center;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 20px 24px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s, background-color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+            background-color: var(--bg-tertiary);
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+            box-shadow: 0 10px 25px var(--shadow);
+            overflow: hidden;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.2s, color 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .menu-toggle span {
+            width: 24px;
+            height: 2px;
+            background-color: var(--text-primary);
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--accent-primary), #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        /* Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
 
         .section {
-            margin-bottom: 40px;
+            margin-bottom: 60px;
         }
 
-        .section h2 {
-            color: var(--accent-color);
-            font-size: 1.8em;
-            margin-bottom: 20px;
-            border-bottom: 3px solid var(--accent-color);
-            padding-bottom: 10px;
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
+        /* Cards Grid */
         .cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
         }
 
         .card {
-            background-color: var(--card-bg);
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px var(--shadow-color);
-            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 32px;
             text-decoration: none;
-            color: var(--text-color);
+            color: var(--text-primary);
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
             display: block;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px var(--shadow-color);
+            transform: translateY(-4px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 12px 24px var(--shadow);
         }
 
         .card-icon {
-            font-size: 2.5em;
-            margin-bottom: 15px;
+            font-size: 3rem;
+            margin-bottom: 16px;
+            display: block;
         }
 
         .card h3 {
-            color: var(--accent-color);
-            margin-bottom: 10px;
-            font-size: 1.3em;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: var(--text-primary);
         }
 
         .card p {
-            line-height: 1.6;
-            opacity: 0.9;
+            color: var(--text-secondary);
+            line-height: 1.7;
         }
 
+        /* Footer */
         footer {
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 40px 20px;
             text-align: center;
-            padding: 30px 20px;
-            margin-top: 40px;
-            color: var(--text-color);
-            opacity: 0.7;
+            color: var(--text-secondary);
+            margin-top: 80px;
         }
 
+        /* Responsive */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2em;
+            .menu-toggle {
+                display: flex;
             }
 
-            .content {
-                padding: 25px;
+            .nav-menu {
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background-color: var(--bg-secondary);
+                flex-direction: column;
+                border-bottom: 1px solid var(--border-color);
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s;
             }
 
-            .theme-toggle {
-                top: 10px;
-                right: 10px;
-                padding: 10px 20px;
+            .nav-menu.active {
+                max-height: 400px;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                border: none;
+                border-top: 1px solid var(--border-color);
+                border-radius: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s;
+            }
+
+            .dropdown.active .dropdown-menu {
+                max-height: 300px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <button class="theme-toggle" onclick="toggleTheme()">✨ Alternar Tema</button>
-
-    <div class="container">
-        <header>
-            <h1>Odair José Bellini</h1>
-            <p class="subtitle">Projetos e Recursos</p>
-        </header>
-
-        <div class="content">
-            <section class="section">
-                <h2>🚀 Ferramentas e Recursos</h2>
-                <div class="cards">
-                    <a href="chats-ia.html" class="card">
-                        <div class="card-icon">🤖</div>
-                        <h3>Central de Chats IA</h3>
-                        <p>Acesso rápido a todos os principais assistentes de IA: ChatGPT, Claude, Gemini, e muitos outros em um só lugar.</p>
-                    </a>
-
-                    <!-- Adicione mais cards aqui conforme necessário -->
-                    <div class="card" style="opacity: 0.5; cursor: default;">
-                        <div class="card-icon">📝</div>
-                        <h3>Em breve...</h3>
-                        <p>Novos projetos e ferramentas serão adicionados aqui.</p>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">Odair José Bellini</a>
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Início</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" onclick="toggleDropdown(event)">Ferramentas ▾</a>
+                    <div class="dropdown-menu">
+                        <a href="chats-ia.html" class="dropdown-item">🤖 Central de Chats IA</a>
+                        <a href="#" class="dropdown-item" style="opacity: 0.5;">📝 Em breve...</a>
                     </div>
-                </div>
-            </section>
-
-            <section class="section">
-                <h2>📫 Contato</h2>
-                <div class="cards">
-                    <a href="https://github.com/odairjosebellini" target="_blank" class="card">
-                        <div class="card-icon">💻</div>
-                        <h3>GitHub</h3>
-                        <p>Confira meus repositórios e projetos.</p>
-                    </a>
-                </div>
-            </section>
+                </li>
+                <li class="nav-item"><a href="https://github.com/odairjosebellini" target="_blank" class="nav-link">GitHub</a></li>
+            </ul>
         </div>
+    </nav>
 
-        <footer>
-            <p>&copy; 2025 Odair José Bellini. Todos os direitos reservados.</p>
-        </footer>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Bem-vindo ao meu Portfólio</h1>
+        <p>Explore ferramentas, projetos e recursos que desenvolvo e compartilho com a comunidade</p>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <section class="section">
+            <h2 class="section-title">🚀 Ferramentas e Recursos</h2>
+            <div class="cards">
+                <a href="chats-ia.html" class="card">
+                    <span class="card-icon">🤖</span>
+                    <h3>Central de Chats IA</h3>
+                    <p>Acesso unificado a todos os principais assistentes de IA: ChatGPT, Claude, Gemini, Grok, e dezenas de outros modelos em uma interface moderna.</p>
+                </a>
+
+                <div class="card" style="opacity: 0.6; cursor: not-allowed;">
+                    <span class="card-icon">📊</span>
+                    <h3>Em Desenvolvimento</h3>
+                    <p>Novos projetos e ferramentas estão sendo desenvolvidos. Fique atento para futuras atualizações.</p>
+                </div>
+
+                <div class="card" style="opacity: 0.6; cursor: not-allowed;">
+                    <span class="card-icon">🛠️</span>
+                    <h3>Mais em Breve</h3>
+                    <p>Esta seção será atualizada com novos recursos e utilidades conforme forem desenvolvidos.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">📫 Links e Contato</h2>
+            <div class="cards">
+                <a href="https://github.com/odairjosebellini" target="_blank" class="card">
+                    <span class="card-icon">💻</span>
+                    <h3>GitHub</h3>
+                    <p>Confira meus repositórios, contribuições e projetos open source.</p>
+                </a>
+            </div>
+        </section>
     </div>
 
-    <script>
-        function toggleTheme() {
-            const body = document.body;
-            body.classList.toggle('dark-mode');
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Odair José Bellini. Todos os direitos reservados.</p>
+    </footer>
 
-            // Salva preferência no localStorage
-            if (body.classList.contains('dark-mode')) {
-                localStorage.setItem('theme', 'dark');
-            } else {
-                localStorage.setItem('theme', 'light');
+    <script>
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        function toggleDropdown(event) {
+            event.preventDefault();
+            if (window.innerWidth <= 768) {
+                const dropdown = event.target.closest('.dropdown');
+                dropdown.classList.toggle('active');
             }
         }
 
-        // Carrega tema salvo ao carregar a página
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                document.body.classList.add('dark-mode');
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('navMenu');
+            const menuToggle = document.querySelector('.menu-toggle');
+
+            if (!event.target.closest('nav')) {
+                navMenu.classList.remove('active');
             }
         });
     </script>
