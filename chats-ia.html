@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central de Chats IA - Coleção Completa 🤖</title>
+    <style>
+        /* Variáveis CSS para Cores */
+        :root {
+            --bg-color: #f4f4f9;
+            --text-color: #333;
+            --container-bg: #fff;
+            --select-bg: #f8f8f8;
+            --accent-color: #007bff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --secondary-bg: #e0e0e0; /* Nova cor para o box secundário */
+            --secondary-text: #222;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --container-bg: #1f1f1f;
+            --select-bg: #333333;
+            --accent-color: #5d9cec;
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --secondary-bg: #333333;
+            --secondary-text: #f0f0f0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            text-align: center;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Mudança: Usei 'margin: 0 auto;' para centralizar e garanti que o 'display: block' implícito do div ocupe a linha. */
+        .container { 
+            background-color: var(--container-bg); 
+            padding: 40px; 
+            border-radius: 12px; 
+            box-shadow: 0 10px 25px var(--shadow-color); 
+            margin: 0 auto; /* Centraliza o contêiner */
+            max-width: 600px;
+            width: 100%;
+            transition: background-color 0.3s;
+            margin-bottom: 20px; /* Adiciona um pequeno espaço abaixo do contêiner principal */
+        }
+
+        h1 { 
+            color: var(--accent-color); 
+            margin-bottom: 30px; 
+            font-size: 2em;
+        }
+        
+        /* Tema Toggle */
+        .theme-toggle-container {
+            margin-bottom: 30px;
+        }
+
+        .theme-toggle-container button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .theme-toggle-container button:hover {
+            background-color: #0056b3;
+            transform: translateY(-1px);
+        }
+
+        /* Estilos do Dropdown */
+        label { 
+            display: block; 
+            margin-bottom: 15px; 
+            font-size: 1.1em; 
+            font-weight: bold; 
+            color: var(--text-color); 
+        }
+
+        #ai-select {
+            padding: 15px 20px;
+            font-size: 1.1em;
+            border-radius: 8px;
+            border: 2px solid var(--accent-color);
+            width: 100%;
+            cursor: pointer;
+            background-color: var(--select-bg);
+            color: var(--text-color);
+            appearance: none; /* Remove estilo padrão do sistema */
+            background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="292.4" height="292.4"><path fill="%23007bff" d="M287 69.4a17.6 17.6 0 0 0-13.6-6.8H19a17.6 17.6 0 0 0-13.6 6.8 17.6 17.6 0 0 0 0 24.3l126.3 126.3a17.6 17.6 0 0 0 24.7 0l126.3-126.3a17.6 17.6 0 0 0 0-24.3z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 10px;
+            transition: border-color 0.3s;
+        }
+        
+        body.dark-mode #ai-select {
+             /* Cor do SVG ajustada para Dark Mode, se necessário */
+             background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="292.4" height="292.4"><path fill="%235d9cec" d="M287 69.4a17.6 17.6 0 0 0-13.6-6.8H19a17.6 17.6 0 0 0-13.6 6.8 17.6 17.6 0 0 0 0 24.3l126.3 126.3a17.6 17.6 0 0 0 24.7 0l126.3-126.3a17.6 17.6 0 0 0 0-24.3z"/></svg>');
+        }
+
+        #ai-select:focus {
+            border-color: #0056b3;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+        }
+
+        /* Estilo para os grupos (categorias) */
+        optgroup {
+            font-style: normal;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .note {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #777;
+        }
+        
+        body.dark-mode .note {
+            color: #bbb;
+        }
+
+        /* Seção de Agregadores */
+        .aggregator-section {
+            background-color: var(--secondary-bg);
+            color: var(--secondary-text);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            margin: 0 auto 40px; /* Centraliza e adiciona margem inferior */
+            max-width: 600px;
+            width: 100%;
+            text-align: left;
+        }
+
+        .aggregator-section h2 {
+            color: var(--accent-color);
+            margin-top: 0;
+            font-size: 1.5em;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+
+        .aggregator-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .aggregator-section li {
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        .aggregator-section a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+
+        .aggregator-section a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body class="normal-mode">
+
+    <div class="container">
+        <div class="theme-toggle-container">
+            <button onclick="toggleTheme()">Alternar Tema ✨</button>
+        </div>
+
+        <h1>Central de Lançamento de IAs 🚀</h1>
+        
+        <label for="ai-select">Selecione o seu Assistente ou Agente de IA:</label>
+        <select id="ai-select" onchange="openAIChat(this.value)">
+            <option value="">-- Escolha uma Ferramenta para Abrir em Nova Aba --</option>
+            
+            <optgroup label="👑 Chats e Modelos Liderança">
+                <option value="https://chatgpt.com/">ChatGPT (OpenAI) 🧠</option>
+                <option value="https://gemini.google.com/">Gemini (Google) 🌟</option>
+                <option value="https://claude.ai/">Claude (Anthropic) 📝</option>
+                <option value="https://copilot.microsoft.com/">Microsoft Copilot 💻</option>
+                <option value="https://www.meta.ai/">Meta AI / Llama 💬</option>
+                <option value="https://grok.x.ai/">Grok (xAI) 😂</option>
+            </optgroup>
+            
+            <optgroup label="🔎 Pesquisa e Fontes">
+                <option value="https://www.perplexity.ai/">Perplexity AI 📚</option>
+                <option value="https://phind.com/">Phind (Devs) 👨‍💻</option>
+                <option value="https://you.com/chat">You.com (YouChat) 🔍</option>
+            </optgroup>
+            
+            <optgroup label="🛡️ Privacidade e Open Source">
+                <option value="https://chat.mistral.ai/">Mistral Le Chat 🇫🇷</option>
+                <option value="https://huggingface.co/chat/">Hugging Chat 🐻</option>
+                <option value="https://chat.z.ai/">Chat.Z (Alternativa Open Source) 💡</option>
+                <option value="https://chat.deepseek.com/">DeepSeek Chat (Código e Matemática) 📐</option>
+                <option value="https://lumo.proton.me/guest">Lumo Chat (Proton) 🔒</option>
+                <option value="https://chat.qwen.ai/">Qwen (Alibaba) 🐉</option>
+                <option value="https://huggingface.co/spaces/tiiuae/falcon-7b-instruct-chat">Falcon (TII) 🦅</option>
+            </optgroup>
+            
+            <optgroup label="🤖 Agentes e Frameworks (Devs/Tech)">
+                <option value="https://devin.ai/">Devin (Cognition Labs) 💡</option>
+                <option value="https://opendevin.ai/">OpenDevin (Projeto Comunitário) 🏗️</option>
+                <option value="https://docs.langchain.com/docs/">LangChain (Framework) 🔗</option>
+                <option value="https://github.com/microsoft/autogen">AutoGen (Microsoft) ⚙️</option>
+                <option value="https://github.com/significant-gravitas/auto-gpt">Auto-GPT (Projeto Original) 🧠✨</option>
+                <option value="https://www.crewai.com/">CrewAI (Framework de Agentes) 🧑‍🤝‍🧑</option>
+                <option value="https://www.tavily.com/">Tavily (Motor de Busca p/ Agentes) 🌐</option>
+            </optgroup>
+
+            <optgroup label="💖 Nicho e Conversação">
+                <option value="https://pi.ai/talk">Pi.ai (Inflection) 👂</option>
+                <option value="https://beta.character.ai/">Character.AI (Personagens) 🎭</option>
+                <option value="https://www.poe.com/">Poe (Agregador de Bots) 🤖</option>
+                <option value="https://chat.cohere.com/">Cohere 📝</option>
+            </optgroup>
+
+        </select>
+        
+        <p class="note">Ao selecionar, a página (chat ou documentação/demo) abrirá imediatamente em uma **nova aba** para garantir o acesso funcional e seguro.</p>
+    </div>
+
+    <div class="aggregator-section">
+        <h2>Pontos de Acesso Unificados (APIs e Playgrounds)</h2>
+        <p>Use essas plataformas para acessar e comparar dezenas de modelos (incluindo GPT-4, Claude, Llama, etc.) com uma única chave API e otimização de custos.</p>
+        <ul>
+            <li>
+                <a href="https://openrouter.ai/" target="_blank">OpenRouter.ai</a> ✨
+                <br>O "router" mais popular para APIs de modelos. Excelente para testar e usar modelos de forma flexível.
+            </li>
+            <li>
+                <a href="https://huggingface.co/models" target="_blank">Hugging Face Models Hub</a> 🐻
+                <br>O centro da comunidade Open Source. Permite testar modelos no navegador e encontrar APIs.
+            </li>
+            <li>
+                <a href="https://deepinfra.com/" target="_blank">DeepInfra</a> ⚙️
+                <br>Foco em velocidade e custo-benefício para modelos de código aberto.
+            </li>
+        </ul>
+    </div>
+    <script>
+        function openAIChat(url) {
+            if (url) {
+                // Abre a URL na nova aba do navegador
+                window.open(url, '_blank');
+
+                // Opcional: Reseta o dropdown
+                setTimeout(() => {
+                    document.getElementById('ai-select').value = "";
+                }, 100);
+            }
+        }
+        
+        // Função para alternar entre Dark Mode e Normal Mode
+        function toggleTheme() {
+            const body = document.body;
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                body.classList.add('normal-mode');
+            } else {
+                body.classList.remove('normal-mode');
+                body.classList.add('dark-mode');
+            }
+        }
+    </script>
+
+</body>
+</html>

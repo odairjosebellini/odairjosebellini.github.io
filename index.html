@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odair José Bellini - GitHub Pages</title>
+    <style>
+        :root {
+            --bg-color: #f4f4f9;
+            --text-color: #333;
+            --container-bg: #fff;
+            --accent-color: #007bff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --card-bg: #f8f9fa;
+        }
+
+        body.dark-mode {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --container-bg: #1f1f1f;
+            --accent-color: #5d9cec;
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --card-bg: #2a2a2a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: var(--container-bg);
+            border-radius: 12px;
+            box-shadow: 0 10px 25px var(--shadow-color);
+            margin-bottom: 30px;
+            transition: background-color 0.3s;
+        }
+
+        h1 {
+            color: var(--accent-color);
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--text-color);
+            font-size: 1.2em;
+            opacity: 0.8;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            transition: background-color 0.3s, transform 0.2s;
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .content {
+            background-color: var(--container-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px var(--shadow-color);
+            transition: background-color 0.3s;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: var(--accent-color);
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 10px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+            text-decoration: none;
+            color: var(--text-color);
+            display: block;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--shadow-color);
+        }
+
+        .card-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .card p {
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .content {
+                padding: 25px;
+            }
+
+            .theme-toggle {
+                top: 10px;
+                right: 10px;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">✨ Alternar Tema</button>
+
+    <div class="container">
+        <header>
+            <h1>Odair José Bellini</h1>
+            <p class="subtitle">Projetos e Recursos</p>
+        </header>
+
+        <div class="content">
+            <section class="section">
+                <h2>🚀 Ferramentas e Recursos</h2>
+                <div class="cards">
+                    <a href="chats-ia.html" class="card">
+                        <div class="card-icon">🤖</div>
+                        <h3>Central de Chats IA</h3>
+                        <p>Acesso rápido a todos os principais assistentes de IA: ChatGPT, Claude, Gemini, e muitos outros em um só lugar.</p>
+                    </a>
+
+                    <!-- Adicione mais cards aqui conforme necessário -->
+                    <div class="card" style="opacity: 0.5; cursor: default;">
+                        <div class="card-icon">📝</div>
+                        <h3>Em breve...</h3>
+                        <p>Novos projetos e ferramentas serão adicionados aqui.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>📫 Contato</h2>
+                <div class="cards">
+                    <a href="https://github.com/odairjosebellini" target="_blank" class="card">
+                        <div class="card-icon">💻</div>
+                        <h3>GitHub</h3>
+                        <p>Confira meus repositórios e projetos.</p>
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Odair José Bellini. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+
+            // Salva preferência no localStorage
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Carrega tema salvo ao carregar a página
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+        });
+    </script>
+</body>
+</html>
