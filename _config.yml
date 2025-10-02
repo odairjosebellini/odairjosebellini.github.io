@@ -1,0 +1,34 @@
+# Configuração do Site
+title: Odair José Bellini
+description: Portfólio pessoal e ferramentas úteis
+baseurl: ""
+url: "https://odairjosebellini.github.io"
+
+# Configurações do Jekyll
+markdown: kramdown
+theme: null
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Configuração de navegação automática
+header_pages:
+  - index.md
+  - chats-ia.md
+
+# Configurações de build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - README.md
+
+# Defaults para front matter
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+      show_in_nav: true

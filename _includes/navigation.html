@@ -1,0 +1,41 @@
+<nav>
+    <div class="nav-container">
+        <a href="{{ '/' | relative_url }}" class="nav-brand">{{ site.title }}</a>
+
+        <button class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <ul class="nav-menu" id="navMenu">
+            <li class="nav-item">
+                <a href="{{ '/' | relative_url }}" class="nav-link {% if page.url == '/' %}active{% endif %}">Início</a>
+            </li>
+
+            {% comment %}
+            Menu dinâmico: adiciona automaticamente todas as páginas que têm show_in_nav: true
+            {% endcomment %}
+            {% assign sorted_pages = site.pages | where: "show_in_nav", true | sort: "nav_order" %}
+
+            {% if sorted_pages.size > 1 %}
+            <li class="nav-item dropdown">
+                <a class="nav-link" onclick="toggleDropdown(event)">Ferramentas ▾</a>
+                <div class="dropdown-menu">
+                    {% for item in sorted_pages %}
+                        {% unless item.url == '/' or item.title == 'Home' %}
+                        <a href="{{ item.url | relative_url }}" class="dropdown-item {% if page.url == item.url %}active{% endif %}">
+                            {% if item.icon %}{{ item.icon }} {% endif %}{{ item.title }}
+                        </a>
+                        {% endunless %}
+                    {% endfor %}
+                </div>
+            </li>
+            {% endif %}
+
+            <li class="nav-item">
+                <a href="https://github.com/odairjosebellini" target="_blank" class="nav-link">GitHub</a>
+            </li>
+        </ul>
+    </div>
+</nav>

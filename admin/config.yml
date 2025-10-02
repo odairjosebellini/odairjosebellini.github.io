@@ -1,0 +1,26 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Opção alternativa para edição local (descomente se necessário)
+# local_backend: true
+
+media_folder: "assets/images"
+public_folder: "/assets/images"
+
+collections:
+  - name: "pages"
+    label: "Páginas"
+    folder: "."
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    filter: {field: "layout", value: "default"}
+    fields:
+      - {label: "Layout", name: "layout", widget: "hidden", default: "default"}
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Ícone (emoji)", name: "icon", widget: "string", required: false, hint: "Emoji que aparece no menu, ex: 🚀"}
+      - {label: "Ordem no Menu", name: "nav_order", widget: "number", default: 10}
+      - {label: "Mostrar no Menu", name: "show_in_nav", widget: "boolean", default: true}
+      - {label: "Descrição (SEO)", name: "description", widget: "string", required: false}
+      - {label: "Conteúdo", name: "body", widget: "markdown"}
