@@ -1,13 +1,13 @@
 :root {
-    --bg-primary: #0a0a0a;
-    --bg-secondary: #111111;
-    --bg-tertiary: #1a1a1a;
-    --text-primary: #e4e4e7;
-    --text-secondary: #a1a1aa;
-    --accent-primary: #3b82f6;
-    --accent-hover: #2563eb;
-    --border-color: #27272a;
-    --shadow: rgba(0, 0, 0, 0.5);
+    --bg-primary: #f5f3e8;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #fefdfb;
+    --text-primary: #1a1a1a;
+    --text-secondary: #5a5a5a;
+    --accent-primary: #c17d4a;
+    --accent-hover: #a56938;
+    --border-color: #e8e4d9;
+    --shadow: rgba(0, 0, 0, 0.08);
 }
 
 * {
@@ -165,7 +165,7 @@ nav {
     font-size: 3.5rem;
     font-weight: 800;
     margin-bottom: 20px;
-    background: linear-gradient(135deg, var(--accent-primary), #8b5cf6);
+    background: linear-gradient(135deg, var(--accent-primary), #d89b6a);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -220,7 +220,7 @@ nav {
 .card:hover {
     transform: translateY(-4px);
     border-color: var(--accent-primary);
-    box-shadow: 0 12px 24px var(--shadow);
+    box-shadow: 0 8px 24px rgba(193, 125, 74, 0.15);
 }
 
 .card-icon {
