@@ -3,7 +3,6 @@ layout: post
 title: Alta Produtividade no VSCode
 icon: ⚡️
 nav_order: 3
-show_in_nav: true
 description: Dicas e atalhos para maximizar sua produtividade no Visual Studio Code.
 ---
 

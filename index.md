@@ -2,46 +2,59 @@
 layout: default
 title: Home
 nav_order: 1
-show_in_nav: false
 ---
-
-<section class="hero">
-    <h1>Bem-vindo ao meu Portfólio</h1>
-    <p>Explore ferramentas, projetos e recursos que desenvolvo e compartilho com a comunidade</p>
-</section>
-
 <div class="container">
-    <section class="section">
-        <h2 class="section-title">🚀 Ferramentas e Recursos</h2>
-        <div class="cards">
-            <a href="{{ '/chats-ia' | relative_url }}" class="card">
-                <span class="card-icon">🤖</span>
-                <h3>Central de Chats IA</h3>
-                <p>Acesso unificado a todos os principais assistentes de IA: ChatGPT, Claude, Gemini, Grok, e dezenas de outros modelos em uma interface moderna.</p>
-            </a>
+  <div class="hero">
+    <h1>Meu Blog</h1>
+    <p>Artigos, tutoriais e dicas sobre desenvolvimento e tecnologia.</p>
+  </div>
 
-            <div class="card" style="opacity: 0.6; cursor: not-allowed;">
-                <span class="card-icon">📊</span>
-                <h3>Em Desenvolvimento</h3>
-                <p>Novos projetos e ferramentas estão sendo desenvolvidos. Fique atento para futuras atualizações.</p>
-            </div>
-
-            <div class="card" style="opacity: 0.6; cursor: not-allowed;">
-                <span class="card-icon">🛠️</span>
-                <h3>Mais em Breve</h3>
-                <p>Esta seção será atualizada com novos recursos e utilidades conforme forem desenvolvidos.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section">
-        <h2 class="section-title">📫 Links e Contato</h2>
-        <div class="cards">
-            <a href="https://github.com/odairjosebellini" target="_blank" class="card">
-                <span class="card-icon">💻</span>
-                <h3>GitHub</h3>
-                <p>Confira meus repositórios, contribuições e projetos open source.</p>
-            </a>
-        </div>
-    </section>
+  <div class="post-list">
+    {% for post in site.posts %}
+      <div class="post-item card">
+        <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+        <p class="post-meta">{{ post.date | date: "%B %d, %Y" }}</p>
+        <p>{{ post.description }}</p>
+        <a href="{{ post.url | relative_url }}" class="read-more">Leia mais →</a>
+      </div>
+    {% endfor %}
+  </div>
 </div>
+
+<style>
+.post-list {
+  display: grid;
+  gap: 24px;
+}
+.post-item.card {
+  padding: 32px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background-color: var(--bg-secondary);
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.post-item.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-primary);
+  box-shadow: 0 8px 24px rgba(193, 125, 74, 0.15);
+}
+.post-item h2 {
+  margin-bottom: 8px;
+}
+.post-item h2 a {
+  text-decoration: none;
+  color: var(--text-primary);
+}
+.post-item .post-meta {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+.post-item .read-more {
+  text-decoration: none;
+  color: var(--accent-primary);
+  font-weight: 600;
+  margin-top: 16px;
+  display: inline-block;
+}
+</style>
