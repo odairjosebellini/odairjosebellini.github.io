@@ -3,7 +3,6 @@ layout: post
 title: Central de Chats IA
 icon: 🤖
 nav_order: 2
-show_in_nav: true
 description: Acesso unificado a todos os principais assistentes de inteligência artificial
 ---
 
