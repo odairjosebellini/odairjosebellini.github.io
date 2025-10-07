@@ -13,16 +13,21 @@
                 <a href="{{ '/' | relative_url }}" class="nav-link {% if page.url == '/' %}active{% endif %}">Início</a>
             </li>
 
-            {% comment %}
-            Menu dinâmico: adiciona automaticamente todas as páginas que têm show_in_nav: true
-            {% endcomment %}
-            {% assign sorted_pages = site.pages | where: "show_in_nav", true | sort: "nav_order" %}
+            <!-- Link para o Blog -->
+            <li class="nav-item">
+                <a href="{{ '/blog.html' | relative_url }}" class="nav-link {% if page.layout == 'post' or page.url == '/blog.html' %}active{% endif %}">Blog</a>
+            </li>
 
-            {% if sorted_pages.size > 1 %}
+            {% comment %}
+            Menu dinâmico para Ferramentas
+            {% endcomment %}
+            {% assign tool_pages = site.pages | where: "show_in_nav", true | where_exp: "item", "item.title != 'Blog'" | sort: "nav_order" %}
+
+            {% if tool_pages.size > 0 %}
             <li class="nav-item dropdown">
                 <a class="nav-link" onclick="toggleDropdown(event)">Ferramentas ▾</a>
                 <div class="dropdown-menu">
-                    {% for item in sorted_pages %}
+                    {% for item in tool_pages %}
                         {% unless item.url == '/' or item.title == 'Home' %}
                         <a href="{{ item.url | relative_url }}" class="dropdown-item {% if page.url == item.url %}active{% endif %}">
                             {% if item.icon %}{{ item.icon }} {% endif %}{{ item.title }}
