@@ -359,9 +359,7 @@ option {
 
 /* Post Navigation */
 .post-navigation {
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border-color);
+    margin-bottom: 40px;
 }
 
 .back-link {
