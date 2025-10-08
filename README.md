@@ -1,77 +1,60 @@
-# Portfólio - Odair José Bellini
+# Blog Pessoal - Odair José Bellini
 
-Site pessoal construído com Jekyll e Decap CMS.
+Este é o repositório do meu blog pessoal, construído com Jekyll e hospedado no GitHub Pages. O site é projetado para ser minimalista, rápido e focado no conteúdo.
 
-## 🚀 Features
+## 📝 Como Adicionar um Novo Post
 
-- **Menu Automático**: Adicione novas páginas e elas aparecem automaticamente no menu
-- **CMS Visual**: Edite conteúdo através do painel admin em `/admin`
-- **Tema Escuro Moderno**: Design inspirado em plataformas como GitHub e Vercel
-- **Totalmente Responsivo**: Funciona perfeitamente em mobile e desktop
+Para adicionar um novo artigo ao blog, siga estes passos:
 
-## 📝 Como Adicionar Novas Páginas
+1.  **Crie um novo arquivo** no diretório `_posts`.
+2.  **Nomeie o arquivo** seguindo o formato padrão do Jekyll: `YYYY-MM-DD-titulo-do-post.md`.
+    *   Exemplo: `2025-10-08-como-usar-o-vscode.md`
+3.  **Adicione o front matter** necessário no topo do arquivo. Este é o cabeçalho que o Jekyll usa para processar o post:
 
-### Opção 1: Via CMS (Interface Visual)
+    ```yaml
+    ---
+    layout: post
+    title: "O Título do Seu Post"
+    description: "Uma breve descrição do post, que aparecerá na página inicial e nas meta tags de SEO."
+    ---
 
-1. Acesse `https://odairjosebellini.github.io/admin`
-2. Faça login com sua conta do GitHub
-3. Clique em "Nova Página"
-4. Preencha os campos e publique
-5. A página aparecerá automaticamente no menu!
+    O conteúdo do seu post em Markdown ou HTML começa aqui...
+    ```
 
-### Opção 2: Via Arquivo (Desenvolvedores)
-
-1. Crie um novo arquivo `.md` na raiz do projeto
-2. Adicione o front matter:
-
-```yaml
----
-layout: default
-title: Minha Nova Página
-icon: 🎨
-nav_order: 3
-show_in_nav: true
-description: Descrição da página
----
-
-Seu conteúdo aqui em Markdown ou HTML
-```
-
-3. Faça commit e push - pronto!
+4.  **Faça o commit e push** das suas alterações. O GitHub Pages irá automaticamente construir e publicar o novo post.
 
 ## 🛠️ Desenvolvimento Local
 
-```bash
-# Instalar dependências
-bundle install
+Para rodar o site localmente e visualizar as alterações antes de publicá-las:
 
-# Rodar servidor local
-bundle exec jekyll serve
-
-# Acessar em http://localhost:4000
-```
+1.  **Instale as dependências:**
+    ```bash
+    bundle install
+    ```
+2.  **Inicie o servidor Jekyll:**
+    ```bash
+    bundle exec jekyll serve
+    ```
+3.  **Acesse o site** no seu navegador em `http://localhost:4000`.
 
 ## 📦 Estrutura do Projeto
 
+A estrutura do projeto foi simplificada para focar no blog:
+
 ```
 .
-├── _layouts/          # Templates do site
-├── _includes/         # Componentes reutilizáveis (nav, footer)
+├── _layouts/          # Contém os layouts `default.html` e `post.html`
+├── _posts/            # Onde todos os posts do blog vivem
 ├── assets/
-│   ├── css/          # Estilos
-│   └── js/           # JavaScript
-├── admin/            # Painel do Decap CMS
-├── _config.yml       # Configuração do Jekyll
-├── index.md          # Página inicial
-└── *.md              # Outras páginas
+│   ├── css/           # Folhas de estilo
+│   └── js/            # Scripts (se houver)
+├── _config.yml        # Arquivo de configuração principal do Jekyll
+└── index.md           # A página inicial, que lista todos os posts
 ```
 
-## 🔧 Configurações
+## 🔧 Configuração
 
-Edite `_config.yml` para:
-- Alterar título e descrição do site
-- Configurar plugins
-- Ajustar comportamento do menu
+As configurações principais do site, como o título (`title`) e a descrição (`description`), podem ser editadas no arquivo `_config.yml`.
 
 ## 📄 Licença
 
