@@ -357,6 +357,24 @@ option {
     color: var(--accent-hover);
 }
 
+/* Post Navigation */
+.post-navigation {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.back-link {
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.back-link:hover {
+    color: var(--accent-hover);
+}
+
 /* Footer */
 footer {
     background-color: var(--bg-secondary);
